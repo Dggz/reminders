@@ -51,7 +51,7 @@ class ReminderScreen extends StatelessWidget {
             backgroundColor: Colors.red,
             onPressed: () async {
               final String id = reminder.id.toString();
-              final put_response = await http.delete(globalURL() + id + '/');
+              final delete_response = await http.delete(globalURL() + id + '/');
               Navigator.pop(context, true);
             },
           ),
@@ -70,7 +70,6 @@ class ReminderScreen extends StatelessWidget {
                 'title': _titlecontroller.text,
                 'text': _txtcontroller.text
               };
-              var url = 'http://192.168.0.102:8000/reminders/';
               final put_response = await http.put(globalURL() + id + '/', body: reminderJson);
               Navigator.pop(context, true);
             },

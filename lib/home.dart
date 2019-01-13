@@ -45,8 +45,8 @@ class HomePage extends StatelessWidget {
       body: FutureBuilder<List<Reminder>>(
         future: fetchPosts(http.Client()),
         builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
-
+          if (snapshot.hasError)
+            print(snapshot.error);
           return snapshot.hasData
               ? ListViewReminders(reminders: snapshot.data)
               : Center(child: CircularProgressIndicator());
