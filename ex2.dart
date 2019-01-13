@@ -23,6 +23,8 @@ class Reminder{
 }
 
 
+void main() => runApp(MainFetchData());
+
 class MainFetchData extends StatefulWidget {
   @override
   _MainFetchDataState createState() => _MainFetchDataState();

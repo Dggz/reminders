@@ -1,37 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http_example/editreminder.dart';
+
 import 'reminder.dart';
-
-
-class ReminderScreen extends StatelessWidget {
-  final Reminder reminder;
-
-  ReminderScreen({Key key, this.reminder}) : super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController _controller = new TextEditingController();
-    TextEditingController _txtcontroller = new TextEditingController(text: reminder.text);
-    _controller.text = reminder.title;
-    _txtcontroller.text = reminder.text;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${reminder.title}"),
-      ),
-
-      body: Padding(
-        padding: EdgeInsets.all(22.0),
-        child: TextFormField(
-          controller: _txtcontroller,
-          decoration: InputDecoration(
-              labelText: 'Reminder text'
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 
 class ListViewReminders extends StatelessWidget {
@@ -76,12 +46,5 @@ class ListViewReminders extends StatelessWidget {
             );
           }),
     );
-  }
-
-
-  void _onTapItem(BuildContext context, Reminder reminder) {
-    Scaffold
-        .of(context)
-        .showSnackBar(new SnackBar(content: new Text(reminder.id.toString() + ' - ' + reminder.title)));
   }
 }

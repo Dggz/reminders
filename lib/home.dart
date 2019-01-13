@@ -1,16 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'reminder.dart';
+import 'package:http_example/addreminder.dart';
+
 import 'listreminders.dart';
+import 'reminder.dart';
+
+String globalURL() {
+  return 'http://192.168.0.102:8000/reminders/';
+//  return 'http://10.182.5.51:8000/reminders/';
+//  return 'http://10.182.5.51:8000/reminders/';
+}
 
 Future<List<Reminder>> fetchPosts(http.Client client) async {
-//  final response = await http.get('http://192.168.0.103:8000/reminders/');
-//  final response = await http.get('http://10.182.5.51:8000/reminders/');
-  final response = await http.get('http://192.168.42.33:8000/reminders/');
+  final response = await http.get(globalURL());
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON
     final parsed = json.decode(response.body);
@@ -23,11 +30,6 @@ Future<List<Reminder>> fetchPosts(http.Client client) async {
   }
 }
 
-//List<Reminder> parsePosts(String responseBody) {
-//  final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
-//
-//  return parsed.map<Reminder>((json) => Reminder.fromJson(json)).toList();
-//}
 
 class HomePage extends StatelessWidget {
   final String title;
@@ -48,6 +50,21 @@ class HomePage extends StatelessWidget {
           return snapshot.hasData
               ? ListViewReminders(reminders: snapshot.data)
               : Center(child: CircularProgressIndicator());
+        },
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.orange,
+        onPressed: () async {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddReminderScreen()),
+          );
+
         },
       ),
     );

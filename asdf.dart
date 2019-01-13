@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 Future<Post> fetchPost() async {
-//  final response = await http.get('http://192.168.0.103:8000/reminders/1/');
-  final response = await http.get('http://10.182.5.51:8000/reminders/1/');
+  final response = await http.get('http://192.168.0.102:8000/reminders/1/');
+//  final response = await http.get('http://10.182.5.51:8000/reminders/1/');
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON
